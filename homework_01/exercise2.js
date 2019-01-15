@@ -5,5 +5,4 @@ function isWeekend() {
   	const days = ['weekend', 'weekday', 'weekday', 'weekday', 'weekday', 'weekday', 'weekend']
     return days[day];
 }
-
 console.log(isWeekend());
