@@ -3,7 +3,7 @@ Question 1. => if i want to queued the function behide a I/O event callbacks tha
 Question 2. => process.nextTick will always be executed first and its not part of the event loop.
       setImmediate will be put in the CHECK state of the event loop and get executed at the stage when a tick of the event loop gets to the CHECK state of the event loop.
 
-3. => 1. Crypto
+Question 3. => 1. Crypto
       2. Events
       3. HTTP
       4. OS
