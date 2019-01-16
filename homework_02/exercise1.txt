@@ -1,11 +1,11 @@
-Question 1.
+Question 1
 if i want to queued the function behide a I/O event callbacks that are alrady in the event queue.
 
-Question 2. 
+Question 2
 process.nextTick is not part of the event loop. will always be executed first after current operation running and before the event loops continues,  because its callbacks are added in the (nextTick queue).
 setImmediate will be put in the CHECK phase of the event loop and get executed at the stage when a tick of the event loop gets to the CHECK phase of the event loop.
 
-Question 3.
+Question 3
 1. Crypto
 2. Events
 3. HTTP
