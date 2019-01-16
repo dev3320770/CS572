@@ -7,7 +7,7 @@ filterNow = function (s, words) {
                 check = true;
             }
         });
-        (check == true) ? (result += '* ') : (result += orgWord + ' ');
+        (check == true) ? (result += '*** ') : (result += orgWord + ' ');
     });
     return result;
 };

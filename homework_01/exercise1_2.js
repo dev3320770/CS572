@@ -12,7 +12,7 @@ String.prototype.filterWords = function (...words) {
                         check = true;
                     }
                 });
-                (check == true) ? (result += '* ') : (result += orgWord + ' ');
+                (check == true) ? (result += '*** ') : (result += orgWord + ' ');
             });
             resolve(result);
         });
