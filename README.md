@@ -1,3 +1,2 @@
 # CS572
-Modern Web Application
-Festus Iipito
+Modern Web Application Repository
