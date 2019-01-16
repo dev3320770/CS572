@@ -1,0 +1,15 @@
+1. => if i want to queued the function behide a I/O event callbacks that are alrady in the event queue.
+
+2. => process.nextTick will always be executed first and its not part of the event loop.
+      setImmediate will be put in the check state of the event loop and get executed at the stage when  a tick circle gets to the check point of the event loop.
+
+3. => 1. Crypto
+      2. Events
+      3. HTTP
+      4. OS
+      5. Path
+      6. Process
+      7. Errors
+      8. HTTPS
+      9. Query Strings
+      10. Stream
