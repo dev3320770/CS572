@@ -1,5 +1,5 @@
-const eventEmitter = require('events')
-class Gym extends eventEmitter {
+const EventEmitter = require('events')
+class Gym extends EventEmitter {
     constructor() {
         super();
     }
