@@ -2,13 +2,16 @@ const EventEmitter = require('events')
 class Gym extends EventEmitter {
     constructor() {
         super();
+        this.msg = "Athlete is working out";
     }
-    work() {
+    workOut() {
         setInterval(() => {
-            this.emit('boom');
+            this.emit('boom', this.msg);
         }, 1000);
     }
 }
 const gym = new Gym();
-gym.on('boom', () => console.log('Athlete is working out'));
-gym.work();
+gym.on('boom', (msg) => {
+    console.log(`${msg}`)
+})
+gym.workOut();
