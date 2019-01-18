@@ -9,11 +9,8 @@ Observable.create(function checkSystem(){
     
         if(mem < 4) {
             console.log("this app needs atleast 4 gig of ram");
-            return;
-        }
-        if(cpus <= 2) {
+        }else if(cpus <= 2) {
             console.log("Processor is not supported");
-            return;
         }
        
         console.log("System is checked successfully");
