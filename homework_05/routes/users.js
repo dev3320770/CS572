@@ -11,7 +11,7 @@ router.get('/',async function(req, res, next) {
     const users = await axios.get('https://randomuser.me/api/?results=10');
   
     res.set({'link':'< href=https://randomuser.me/api/?results=10&page=2;  rel="next"/>'});
-    res.set('Cache-Control', 'private, max-age=86400');
+    res.set('Cache-Control', 'public, max-age=86400');
     res.send(users.data);
     // next();
 
