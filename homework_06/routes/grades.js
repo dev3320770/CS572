@@ -4,7 +4,7 @@ var gradesDemo = require("../model/data");
 var bodyParser = require("body-parser");
 // var urlencodedParser = bodyParser.urlencoded({extended:false});
 var jsonParser = bodyParser.json();
-var validate = require('../validate');
+var validate = require('../middleware/validate');
 var app = express();
 app.use("validate", validate);
 
