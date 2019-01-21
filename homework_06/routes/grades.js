@@ -8,91 +8,64 @@ var validate = require('../middleware/validate');
 var app = express();
 app.use("validate", validate);
 
-
 var grades = gradesDemo;
 
 /* GET users listing. */
-router.get('/', async (req, res) => {
-  try {
-    const results = await grades;
+router.get('/', async (req, res, next) => {
+  const results = await grades;
+  if (!results) return next("Error");
   res.send(results);
-  } catch (error) {
-    res.status(400).send("Error");
-  }
 });
 
-router.get("/:id", async (req, res) => {
- try {
-  const results = await grades.find(g => g.id === parseInt(req.params.id) );
-  if(!results){
-    return res.status(404).send("Not Found");
-  }
+router.get("/:id", async (req, res, next) => {
+  const results = await grades.find(g => g.id === parseInt(req.params.id));
+  console.log(results);
+  if (!results) return next("error");
   res.send(results);
- } catch (error) {
-   res.status(400).send("error");
- }
 });
 
-router.post("/", validate ,jsonParser,  (req, res) => {
-
-  try {
-    const id = {
-      id: grades.length + 1
-    };
-    const newData = req.body;
-    const idData = id;
-    const grade = {...idData , ...newData};
-    grades.push(grade);
-    res.send("success");
-  } catch (error) {
-    res.status(400).send("Error");
-  }
+router.post("/", validate, jsonParser, (req, res) => {
+  const id = {
+    id: grades.length + 1
+  };
+  const newData = req.body;
+  const idData = id;
+  const grade = { ...idData,
+    ...newData
+  };
+  const d = grades.push(grade);
+  res.send("success");
 
 });
 
-router.delete("/:id", async (req, res) => {
-  try {
-    const index = await grades.findIndex(g => g.id ===parseInt(req.params.id) );
-    if(!index || index === -1){
-      return res.status(404).send("Not Found");
-    }
-    const results = grades.splice(index, 1);
-    res.send(results);
-  } catch (error) {
+router.delete("/:id", async (req, res, next) => {
+  const index = await grades.findIndex(g => g.id === parseInt(req.params.id));
+  if (!index || index === -1) return next("error");
+  const results = grades.splice(index, 1);
+  res.send(results);
 
-    res.status(400).send("Error");
-    
-  }
-  
 });
 
-router.put("/:id", validate, async (req, res) => {
+router.put("/:id", validate, async (req, res, next) => {
+  const index = await grades.findIndex(g => g.id === parseInt(req.params.id));
+  // const newData = {
+  //   name: req.body.name,
+  //   course: req.body.course,
+  //   grade: req.body.grade
+  // }
+  if (!index || index === -1) return next("error");
+  const id = {
+    id: index + 1
+  };
+  const newData = req.body;
+  const idData = id;
+  const grade = { ...idData,
+    ...newData
+  };
 
-  try {
-    const index = await grades.findIndex(g => g.id === parseInt(req.params.id) );
+  grades[index] = grade;
+  res.send(grades[index]);
 
-    // const newData = {
-    //   name: req.body.name,
-    //   course: req.body.course,
-    //   grade: req.body.grade
-    // }
-    if(!index || index === -1){
-      return res.status(404).send("Not Found");
-    }
-    const id = {
-      id: index + 1
-    };
-    const newData = req.body;
-    const idData = id;
-    const grade = {...idData , ...newData};
-
-    grades[index] = grade;
-    res.send(grades[index]);
-    
-  } catch (error) {
-    res.status(400).send("error");
-  }
-
-})
+});
 
 module.exports = router;
