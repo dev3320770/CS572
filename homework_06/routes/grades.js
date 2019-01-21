@@ -14,8 +14,8 @@ var grades = gradesDemo;
 /* GET users listing. */
 router.get('/', async (req, res) => {
   try {
-    const data = await grades;
-  res.send(data);
+    const results = await grades;
+  res.send(results);
   } catch (error) {
     res.status(400).send("Error");
   }
@@ -23,8 +23,11 @@ router.get('/', async (req, res) => {
 
 router.get("/:id", async (req, res) => {
  try {
-  const data = await grades.find(grade => grade.id == req.params.id);
-  res.send(data);
+  const results = await grades.find(g => g.id === parseInt(req.params.id) );
+  if(!results){
+    return res.status(404).send("Not Found");
+  }
+  res.send(results);
  } catch (error) {
    res.status(400).send("error");
  }
@@ -38,8 +41,8 @@ router.post("/", validate ,jsonParser,  (req, res) => {
     };
     const newData = req.body;
     const idData = id;
-    const data = {...idData , ...newData};
-    grades.push(data);
+    const grade = {...idData , ...newData};
+    grades.push(grade);
     res.send("success");
   } catch (error) {
     res.status(400).send("Error");
@@ -48,11 +51,13 @@ router.post("/", validate ,jsonParser,  (req, res) => {
 });
 
 router.delete("/:id", async (req, res) => {
-
   try {
-    const index = await grades.findIndex(i => i.id == req.params.id);
-    const data = grades.splice(index, 1);
-    res.send(data)
+    const index = await grades.findIndex(g => g.id ===parseInt(req.params.id) );
+    if(!index || index === -1){
+      return res.status(404).send("Not Found");
+    }
+    const results = grades.splice(index, 1);
+    res.send(results);
   } catch (error) {
 
     res.status(400).send("Error");
@@ -64,14 +69,24 @@ router.delete("/:id", async (req, res) => {
 router.put("/:id", validate, async (req, res) => {
 
   try {
-    const index = await grades.findIndex(i => i.id == req.params.id);
+    const index = await grades.findIndex(g => g.id === parseInt(req.params.id) );
 
     // const newData = {
     //   name: req.body.name,
     //   course: req.body.course,
     //   grade: req.body.grade
     // }
-    grades[index] = req.body;
+    if(!index || index === -1){
+      return res.status(404).send("Not Found");
+    }
+    const id = {
+      id: index + 1
+    };
+    const newData = req.body;
+    const idData = id;
+    const grade = {...idData , ...newData};
+
+    grades[index] = grade;
     res.send(grades[index]);
     
   } catch (error) {
