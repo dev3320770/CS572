@@ -38,8 +38,6 @@ doConnect()
 //     const db = client.db('library_mum_cs572');
 //     const collection = db.collection('Books');
 
-    
-
 //     collection.findOne({}, function(err, doc){
 //         console.dir(doc);
 //         client.close;
