@@ -1,8 +1,10 @@
 const express = require("express");
 const crypto = require("crypto");
 const aes256 = require("aes256");
+require('dotenv').config();
+
 const MongoClient = require('mongodb').MongoClient;
-const client = new MongoClient('mongodb://admin:admin123@ds145289.mlab.com:45289/library_mum_cs572',{useNewUrlParser:true});
+const client = new MongoClient(`mongodb://${process.env.DB_USER}:${process.env.DB_PASS}@${process.env.DB_HOST}`,{useNewUrlParser:true});
 
 const app = express();
 
