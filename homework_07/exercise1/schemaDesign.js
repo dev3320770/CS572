@@ -23,8 +23,7 @@ var schema = {
             "streetName":"1000 North Street"
         }],
         "checkOutDate": Date.now(),
-        "returnDate": new Date("February 19, 2019 00:00:00"),
-        "status": 1
+        "returnDate": new Date("February 19, 2019 00:00:00")
     }],
     "isAvailable": false
 
