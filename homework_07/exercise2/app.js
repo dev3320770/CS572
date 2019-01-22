@@ -12,8 +12,8 @@ const port = app.get("port");
 app.use(doConnect);
 
 app.get("/secret" ,(req,res)=>{
-const collection = req.result;
-    collection.findOne({}, function(err, doc){
+const db = req.result;
+    db.collection("homework07").findOne({}, function(err, doc){
         // client.close;
         const decipher = crypto.createDecipher("aes256", "asaadsaad");
         const decrypted = decipher.update(doc.message, 'hex', 'utf8') + decipher.final('utf8');
@@ -30,10 +30,10 @@ function doConnect(req,res,next) {
        } else {
            console.log('Successfully connected to MongoDB')
            const db = client.db('library_mum_cs572');
-           const collection = db.collection('homework07'); 
+        //    const collection = db.collection('homework07'); 
            client.close;
            
-           req.result = collection;
+           req.result = db;
            return next();
        }
    })
