@@ -13,46 +13,34 @@ app.use(function (req,res,next){
 console.log("hey");
 
 function doConnect() {
-    client.connect((err, db) => {
+    client.connect((err) => {
        if(err) { 
            throw err
        } else {
            console.log('Successfully connected to MongoDB')
            const db = client.db('library_mum_cs572');
-           const collection = db.collection('homework07');
-            collection.findOne({}, function(err, doc){
-          
-            client.close;
+           const collection = db.collection('homework07'); 
+           client.close;
            
-            req.result = doc;
-            req.next();
-            });
-            console.dir('Done');
+           req.result = collection;
+           return next();
        }
    })
 }
 doConnect()
 
-// client.connect( function (err) {
-
-//     const db = client.db('library_mum_cs572');
-//     const collection = db.collection('Books');
-
-//     collection.findOne({}, function(err, doc){
-//         console.dir(doc);
-//         client.close;
-//         req.next();
-//     });
-//     console.dir('Done');
-// });
-
 });
 
 app.get("/secret",(req,res)=>{
-    const decipher = crypto.createDecipher("aes256", "asaadsaad");
-    const decrypted = decipher.update(req.result.message, 'hex', 'utf8') + decipher.final('utf8');
-    
-    res.send(decrypted);
+const collection = req.result;
+    collection.findOne({}, function(err, doc){
+        // client.close;
+        const decipher = crypto.createDecipher("aes256", "asaadsaad");
+        const decrypted = decipher.update(doc.message, 'hex', 'utf8') + decipher.final('utf8');
+        res.send(decrypted);
+
+        });
+
 });
 
 app.listen(port, ()=> console.log(`Listening on port ${port}`));
