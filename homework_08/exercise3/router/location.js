@@ -3,7 +3,7 @@ const router = express.Router();
 
 
 
-router.get("/find",async (req, res)=>{
+router.get("/",async (req, res)=>{
     const collection = req.collec;
     const searchData = req.body;
     if(!req.body || !req.body.category){
