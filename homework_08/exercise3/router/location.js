@@ -15,7 +15,7 @@ router.get("/",async (req, res)=>{
    const lat = searchFromData[0].location[1];
 
     const query = {location:{$near:{$geometry:{coordinates:[log,lat]}}}};
-    const results = await collection.find(query).toArray();
+    const results = await collection.find(query).limit(3).toArray();
     res.send(results);
 
 })
