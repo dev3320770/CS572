@@ -1,2 +1,5 @@
 i will create a Array typed keys index (Multikey Index);
-db.collectionName.createIndex({ISBN:1,student:1});
+db.collectionName.createIndex({student:1,ISBN:1});
+
+Because you have many students checking out same books recognized by ISBN in Database.
+Many students will end up checking out the one book a hundrend times.
