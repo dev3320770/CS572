@@ -6,7 +6,7 @@ const router = express.Router();
 router.get("/",async (req, res)=>{
     const collection = req.collec;
     if(!req.body || !req.body.category){
-        return res.status(400).send("Category required name is optional")
+        return res.status(400).send("Category required, name is optional")
     }
     const searchData = req.body;
   
