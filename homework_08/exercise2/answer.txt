@@ -1,0 +1,2 @@
+i will create a Array typed keys index (Multikey Index);
+db.collectionName.createIndex({ISBN:1,student:1});
