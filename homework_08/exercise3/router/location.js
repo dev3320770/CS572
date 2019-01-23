@@ -5,10 +5,11 @@ const router = express.Router();
 
 router.get("/",async (req, res)=>{
     const collection = req.collec;
-    const searchData = req.body;
     if(!req.body || !req.body.category){
         return res.status(400).send("Category required name is optional")
     }
+    const searchData = req.body;
+  
     const searchFromData = await collection.find(searchData).toArray();
 
    const log = searchFromData[0].location[0];
