@@ -2,8 +2,9 @@ const express = require("express");
 const app = express();
 const exercise = require("./router/exercise");
 const MongoClient = require("mongodb").MongoClient;
+require('dotenv').config();
 
-const client = new MongoClient("mongodb+srv://sysadmin:Admin2020@tutaappcluster-ho95w.mongodb.net/cs572?retryWrites=true",{useNewUrlParser:true});
+const client = new MongoClient(`mongodb+srv://${process.env.DB_USER}:${process.env.DB_PASS}@${process.env.DB_HOST}/cs572?retryWrites=true`,{useNewUrlParser:true});
 app.use(express.json());
 app.set("port", process.env.PORT || 3000);
 const port =app.get("port");
