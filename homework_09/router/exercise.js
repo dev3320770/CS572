@@ -15,6 +15,8 @@ router.get("/question2", async (req, res) => {
     const collection = req.dbcoll;
     const data = await collection.aggregate([
         { $match: { 'pop': { $gt: 1000 } } },
+        { $group: { _id: "$state", zip_codes: { $addToSet: "$_id" } } },
+        { $project: { _id: 0, state: "$_id", zip_codes: 1 } }
     ]).toArray();
     res.send(data);
 })
