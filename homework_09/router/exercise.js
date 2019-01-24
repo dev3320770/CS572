@@ -11,12 +11,12 @@ router.get("/question1", async (req, res) => {
     ]).toArray();
     res.send(data);
 })
-router.get("/question2", async (req, res) => {
+router.get("/question2", async (req, res) => {  
     const collection = req.dbcoll;
     const data = await collection.aggregate([
         { $match: { 'pop': { $gt: 1000 } } },
-        { $group: { _id: "$state", zip_codes: { $addToSet: "$_id" } } },
-        { $project: { _id: 0, state: "$_id", zip_codes: 1 } }
+        // { $group: { _id: "$state", zip_codes: { $addToSet: "$_id" } } },
+        { $project: {city:0,loc:0, state: 0 } }
     ]).toArray();
     res.send(data);
 })
